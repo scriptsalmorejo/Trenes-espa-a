@@ -1,36 +1,24 @@
-# Visor ADIF
+# Andén
 
-Réplica del componente visor de pantallas de estaciones de ADIF de
-[pantallas-estaciones.vercel.app](https://pantallas-estaciones.vercel.app).
+Paneles de salidas y llegadas en directo de las estaciones de **Córdoba** y **Madrid**.
+
+- Cambia de ciudad con un toque. Cada ciudad tiene su color: terracota para Córdoba y rojo para Madrid.
+- Las estaciones principales aparecen arriba; el resto de la provincia se busca por nombre o municipio.
+- Cuatro vistas del panel: salidas, llegadas, por vía y reloj.
+- **Solo trenes hacia Madrid / desde Córdoba**: filtra el panel para ver únicamente los trenes que
+  paran en la otra ciudad (Córdoba Julio Anguita; Puerta de Atocha, Chamartín o Atocha Cercanías).
+- Guarda tus estaciones con ☆; quedan en tu navegador.
+- Pantalla completa, o un enlace con `?full=1` para dejar el panel fijo en una tele o tablet.
+  Toda la configuración viaja en la URL.
 
 ## Cómo funciona
 
-- `src/components/AdifViewer.vue`: el visor. Abre una conexión SignalR (WebSocket) con
-  `https://info.adif.es/InfoStation`, se une al grupo `dnv3-gravita-<código>` de la estación y,
-  cada vez que llega un mensaje, se lo envía con `postMessage` (`grvta.setData`) a un iframe con
-  el tablero de ADIF. Muestra un cargador mientras conecta, reintenta y comprueba la conexión cada minuto.
-- `public/x-1.9/`: copia del tablero de ADIF ("Infotren Vista" / Gravita), con sus CSS, JS y
-  fuentes, tal y como la sirve la web original. Los pictogramas y logotipos se siguen cargando
-  desde `info.adif.es`.
-- `src/App.vue`: página de demo con buscador de estaciones, tipo de pantalla (salidas,
-  llegadas, vía, A‑Z, reloj), tráfico, idiomas y opciones de columnas. La configuración se guarda
-  en la URL, y el botón **Pantalla completa** abre `?full=1&...` con solo el visor.
-
-### Uso del componente
-
-```vue
-<AdifViewer
-  station-code="17000"
-  interfaz="adif-infotren-vista-departures"
-  traffic="C,A,L,R"
-  languages="ESP,ENG"
-  font-size="auto"
-  @status="(s) => console.log(s)"
-  @data="(d) => console.log(d)"
-/>
-```
-
-Cada prop se pasa al tablero como parámetro de URL en kebab-case (`showPlatform` → `show-platform`).
+- `src/components/AdifViewer.vue` es el visor. Se conecta por WebSocket (SignalR) a
+  `https://info.adif.es/InfoStation`, recibe los datos de la estación en tiempo real y se los pasa
+  al panel de Adif, que se carga en un iframe desde `public/x-1.9/`.
+- `src/data/estaciones.js` es la lista de estaciones de las dos provincias con su código de Adif,
+  depurada a mano (sin trenes turísticos, duplicados ni códigos internos).
+- `src/App.vue` es la interfaz de Andén.
 
 ## Desarrollo
 
@@ -40,27 +28,17 @@ npm run dev      # servidor de desarrollo
 npm run build    # compila en dist/
 ```
 
-## Despliegue en Vercel
+Hace falta Node 20.19 o superior.
 
-El repositorio ya incluye `vercel.json` (Vite, `npm ci`, `npm run build`, salida en `dist/`).
+## Despliegue
 
-1. En [vercel.com/new](https://vercel.com/new), importa el repositorio `Trenes-espa-a`.
-2. Deja la configuración que detecta y pulsa **Deploy**. No hacen falta variables de entorno.
-3. Cada push a `main` despliega producción; cada pull request genera una URL de vista previa.
-
-También desde la terminal: `npx vercel` (vista previa) o `npx vercel --prod`.
-
-El tablero de `public/x-1.9/` se sirve tal cual como fichero estático, y las rutas
-desconocidas vuelven a `index.html`. Los ficheros con hash y las fuentes se cachean un año.
-Hace falta Node 20.19 o superior (lo pide Vite 7).
-
-Los datos en tiempo real dependen de que ADIF acepte la conexión WebSocket desde tu origen. Si la
-rechaza, el visor muestra el estado de error.
+El proyecto está conectado a Vercel (`vercel.json`): cada push a `main` publica producción y cada
+pull request genera una vista previa.
 
 ## Licencia y aviso legal
 
-Código adaptado de [mariomnts/pantallas-estaciones](https://github.com/mariomnts/pantallas-estaciones),
-publicado bajo GPL-3.0. Este proyecto mantiene esa misma licencia (ver `LICENSE`).
+Andén es un proyecto personal y **no oficial**, sin relación con Adif. Los horarios, el panel
+(`public/x-1.9`), sus fuentes y la marca Adif pertenecen a Adif.
 
-Proyecto **no oficial** y sin afiliación con ADIF. El tablero (`public/x-1.9`), las fuentes
-AdifHauss, la marca, los logotipos y los datos son propiedad de ADIF.
+El visor está adaptado de [mariomnts/pantallas-estaciones](https://github.com/mariomnts/pantallas-estaciones),
+publicado bajo GPL-3.0, así que este proyecto mantiene esa misma licencia (ver `LICENSE`).
