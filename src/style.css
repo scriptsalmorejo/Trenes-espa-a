@@ -1,31 +1,54 @@
-@font-face {
-  font-family: 'AdifHauss';
-  src: url('/fonts/AdifHauss-Medium.woff2') format('woff2'), url('/fonts/AdifHauss-Medium.woff') format('woff');
-  font-weight: 400;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'AdifHauss';
-  src: url('/fonts/AdifHauss-Bold.woff2') format('woff2');
-  font-weight: 700;
-  font-display: swap;
-}
-
 :root {
-  --color-blue: #001b41;
-  --color-dark-blue: #102341;
-  --color-light-blue: #1a3254;
-  --color-light-green: #bfefd5;
-  --color-dark-green: #acdac6;
-  --panel: #1e293b;
-  --panel-border: #475569;
-  --muted: #94a3b8;
-  font-family: 'AdifHauss', system-ui, sans-serif;
-  color: #fff;
-  background: var(--color-blue);
+  --bg: #15120f;
+  --surface: #1f1b17;
+  --surface-2: #2b2621;
+  --line: #3a332c;
+  --text: #f5eee6;
+  --text-muted: #a99f94;
+  --board-bg: #0f0d0b;
+  --on-accent: #16130f;
+
+  /* Un color por ciudad: terracota para Córdoba, rojo madrileño para Madrid. */
+  --cordoba: #e58a3c;
+  --madrid: #e5484d;
+  --accent: var(--cordoba);
+
+  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--bg);
   -webkit-font-smoothing: antialiased;
+  color-scheme: dark;
 }
 
-* { box-sizing: border-box; }
-html, body, #app { margin: 0; padding: 0; min-height: 100%; }
-body { background: var(--color-blue); }
+[data-city='madrid'] {
+  --accent: var(--madrid);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background:
+    radial-gradient(1200px 500px at 10% -10%, color-mix(in srgb, var(--cordoba) 10%, transparent), transparent),
+    radial-gradient(1000px 500px at 100% 0%, color-mix(in srgb, var(--madrid) 8%, transparent), transparent),
+    var(--bg);
+  min-height: 100vh;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--accent, #e58a3c);
+  outline-offset: 2px;
+}

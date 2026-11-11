@@ -7,7 +7,7 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount, computed, watch } from 'vue'
 import * as signalR from '@microsoft/signalr'
-import Logo from './Logo.vue'
+import BrandMark from './BrandMark.vue'
 
 const props = defineProps([
   'stationCode',
@@ -702,10 +702,11 @@ onBeforeUnmount(() => {
   <div class="gravita-container">
     <div v-if="status !== 'connected'" class="loader-container">
       <div class="loader-content">
-        <Logo class="loader-logo" />
-        <span class="loader-text" v-if="props.stationCode && status === 'error'">No se han podido cargar los datos de ADIF</span>
-        <span class="loader-text" v-else-if="props.stationCode && status === 'reconnecting'">Reconectando con ADIF…</span>
-        <span class="loader-text" v-else-if="props.stationCode">Cargando datos de ADIF…</span>
+        <BrandMark class="loader-logo" />
+        <span class="loader-text" v-if="props.stationCode && status === 'error'">Adif no responde ahora mismo</span>
+        <span class="loader-text" v-else-if="props.stationCode && status === 'reconnecting'">Reconectando…</span>
+        <span class="loader-text" v-else-if="props.stationCode">Esperando al panel…</span>
+        <span class="loader-text" v-else>Elige una estación</span>
       </div>
     </div>
     <iframe
@@ -727,14 +728,13 @@ onBeforeUnmount(() => {
 
 .loader-container {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--color-blue, #0053a5);
+  background:
+    radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--accent, #e0893a) 18%, transparent), transparent 60%),
+    var(--board-bg, #16130f);
   z-index: 1;
 }
 
@@ -742,36 +742,30 @@ onBeforeUnmount(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .loader-logo {
-  width: 35%;
-  stroke: var(--color-light-green);
-  color: var(--color-light-green);
-  fill: none;
-  animation: pulse-logo 1.5s ease-in-out infinite;
+  width: clamp(48px, 12%, 96px);
+  color: var(--accent, #e0893a);
+  animation: arrive 1.6s ease-in-out infinite;
 }
 
 .loader-text {
-  color: white;
-  font-size: 1.3rem;
-  font-weight: 500;
-  letter-spacing: 0.5px;
+  color: var(--text-muted, #a8a097);
+  font-family: var(--font-body, system-ui, sans-serif);
+  font-size: clamp(0.85rem, 1.6vw, 1.1rem);
+  letter-spacing: 0.02em;
   text-align: center;
-  opacity: 0.7;
 }
 
-@keyframes pulse-logo {
-  0% {
-    opacity: 0.3;
-  }
-  50% {
-    opacity: 0.8;
-  }
-  100% {
-    opacity: 0.3;
-  }
+@keyframes arrive {
+  0%, 100% { transform: translateX(-6px); opacity: 0.55; }
+  50% { transform: translateX(6px); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader-logo { animation: none; }
 }
 
 iframe {
