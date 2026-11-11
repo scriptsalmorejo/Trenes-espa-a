@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="logo" width="260" height="260" viewBox="0 0 260 260" fill="none"
+  stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+  <style>
+    :root {
+      --blue: #001b41;
+    }
+  </style>
+
+  <defs>
+    <mask id="screenMask" maskUnits="userSpaceOnUse">
+      <rect width="260" height="260" fill="white" />
+
+      <path d="M35 110 H210 Q255 130 210 150 H35 Z" fill="black" />
+      <circle cx="80" cy="153" r="12" fill="black" />
+      <circle cx="125" cy="153" r="12" fill="black" />
+      <circle cx="175" cy="153" r="12" fill="black" />
+
+      <rect x="70" y="120" width="34" height="18" rx="2" ry="2" fill="white" stroke="none" />
+      <rect x="115" y="120" width="34" height="18" rx="2" ry="2" fill="white" stroke="none" />
+      <rect x="160" y="120" width="34" height="18" rx="2" ry="2" fill="white" stroke="none" />
+    </mask>
+  </defs>
+
+  <rect x="10" y="35" width="235" height="185" rx="20" ry="20" fill="var(--blue)" stroke="var(--blue)" stroke-width="1"
+    mask="url(#screenMask)" />
+</svg>

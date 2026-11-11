@@ -1,0 +1,145 @@
+/* FUENTES CORPORATIVAS */
+
+@font-face {
+    font-family: 'AdVista24_BrandFont_Medium';
+    src: url('../fonts/WOFF2/AdifHauss-Medium.woff2') format('woff2'),
+    url('../fonts/WOFF/AdifHauss-Medium.woff') format('woff');
+  }
+
+@font-face {
+  font-family: 'AdVista24_BrandFont_Bold';
+  src: url('../fonts/WOFF2/AdifHauss-Bold.woff2') format('woff2'),
+  url('../fonts/WOFF/AdifHauss-Bold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'AdVista24_BrandFont_Light';
+  src: url('../fonts/WOFF2/AdifHauss-Light.woff2') format('woff2'),
+  url('../fonts/WOFF/AdifHauss-Light.woff') format('woff');
+}
+
+
+/* COLORES CORPORATIVOS */
+
+/* Interfaz de salidas */
+.adif-infotren-vista-departures {
+
+    --AdVista24-table-background-color: #102341;
+
+    --AdVista24-row-main-background-color: #102341;
+    --AdVista24-row-alternate-background-color: #1A3254;
+    --AdVista24-row-text-color: white;
+
+    --AdVista24-header-background-color: #BFEFD5;
+    --AdVista24-header-text-color:#102341;
+
+    --AdVista24-row-teorical-time-color: white;
+    --AdVista24-row-status-color: #5FE0AF;
+    --AdVista24-row-cancelled-color: #FF8557;
+
+
+    --AdVista24-row-platform-preview-text-color: #5FE0AF;
+    --AdVista24-row-access-time-text-color: #5FE0AF;
+
+}
+
+
+/* Interfaz de llegadas */
+.adif-infotren-vista-arrivals {
+
+    --AdVista24-table-background-color: #BFEFD5;
+
+    --AdVista24-row-main-background-color: #BFEFD5;
+    --AdVista24-row-alternate-background-color:#ACDAC6;
+    --AdVista24-row-text-color: #102341;
+
+    --AdVista24-header-background-color: #102341;
+    --AdVista24-header-text-color:white;
+
+    --AdVista24-row-teorical-time-color: #102341;
+    --AdVista24-row-status-color: #4358E0;
+    --AdVista24-row-cancelled-color: #521625;
+    
+    --AdVista24-row-platform-preview-text-color: #045648;
+    --AdVista24-row-access-time-text-color: #4358E0;
+
+}
+
+
+/* Interfaz de andén */
+.adif-infotren-vista-platform {
+
+    --AdVista24-train-main-background-color: #102341;
+    --AdVista24-train-alternate-background-color: #1A3254;
+
+    --AdVista24-observation-text-color: #5FE0AF;
+
+    --AdVista24-closed-checkin-background-color: #FF8557;
+    --AdVista24-closed-checkin-text-color: #102341;
+
+    --AdVista24-platform-side-arrow-background-color: #5FE0AF;
+
+}
+
+/* Interfaz de reloj */
+.adif-infotren-vista-clock {
+
+    --AdVista24-clock-background-color: #102341;
+    --AdVista24-clock-text-color: white;
+
+}
+
+
+
+
+/* Interfaz alfabética */
+.adif-infotren-vista-alphabetical {
+
+    --AdVista24-table-background-color: #102341;
+
+    --AdVista24-row-main-background-color: #102341;
+    --AdVista24-row-alternate-background-color: #1A3254;
+    --AdVista24-row-text-color: white;
+
+    --AdVista24-bar-color: white;
+
+    --AdVista24-header-background-color: #BFEFD5;
+    --AdVista24-header-text-color:#102341;
+
+
+    --AdVista24-letter-index-even-background-color: #5FE0AF;
+    --AdVista24-letter-index-odd-background-color: #BFEFD5;
+
+}
+
+/* Símbolo de vía */
+.adif-infotren-vista .platform-sign {
+
+    --AdVista24-platform-sign-background-color: #001B41;
+    --AdVista24-platform-sign-bar-color: #5FE0AF;
+    
+}
+
+
+/* Alertas */
+.adif-infotren-vista .alerts .alert.warning-alert {
+    --AdVista24-alert-background-color: #FFCE6C;
+    --AdVista24-alert-text-color:  black;
+}
+
+.adif-infotren-vista .alerts .alert.severe-alert {
+    --AdVista24-alert-background-color: #FF8557;
+    --AdVista24-alert-text-color:  black;
+}
+
+.adif-infotren-vista .alerts .alert.info-alert {
+    --AdVista24-alert-background-color: #5FE0AF;
+    --AdVista24-alert-text-color:  #102341;
+}
+
+.adif-infotren-vista .alerts .alert.works-alert {
+    --AdVista24-alert-background-color: #5FE0AF;
+    --AdVista24-alert-text-color:  #102341;
+}
+
+
