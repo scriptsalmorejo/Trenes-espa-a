@@ -40,6 +40,20 @@ npm run dev      # servidor de desarrollo
 npm run build    # compila en dist/
 ```
 
+## Despliegue en Vercel
+
+El repositorio ya incluye `vercel.json` (Vite, `npm ci`, `npm run build`, salida en `dist/`).
+
+1. En [vercel.com/new](https://vercel.com/new), importa el repositorio `Trenes-espa-a`.
+2. Deja la configuración que detecta y pulsa **Deploy**. No hacen falta variables de entorno.
+3. Cada push a `main` despliega producción; cada pull request genera una URL de vista previa.
+
+También desde la terminal: `npx vercel` (vista previa) o `npx vercel --prod`.
+
+El tablero de `public/x-1.9/` se sirve tal cual como fichero estático, y las rutas
+desconocidas vuelven a `index.html`. Los ficheros con hash y las fuentes se cachean un año.
+Hace falta Node 20.19 o superior (lo pide Vite 7).
+
 Los datos en tiempo real dependen de que ADIF acepte la conexión WebSocket desde tu origen. Si la
 rechaza, el visor muestra el estado de error.
 
