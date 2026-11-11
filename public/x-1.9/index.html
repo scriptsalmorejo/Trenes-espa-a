@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="assets/gravita/css/adif_infotren_vista_reset.css">
+    <link rel="stylesheet" type="text/css" href="assets/gravita/css/adif_infotren_vista_branding.css">
+    <link rel="stylesheet" type="text/css" href="assets/gravita/css/adif_infotren_vista_styles.css">
+    <title>ADIF INFOTREN VISTA</title>
+
+    
+
+</head>
+<body onload="loadFunction()">
+
+    <script>
+        //variable global para almacenar los parametros de url
+        var vars = {}
+        var station = undefined
+        generarCabecera();
+        function generarCabecera() {
+            // console.log(vars);
+            station = vars['IdEstacion'];
+            //Tratamos las vars y las adaptamos a como se quiera:
+            //bien aqui o en una funcion llamada desde aqui
+            //generamos cabecera con los atributos
+            if(vars['interfaz'] && datosRecibidos){ // Hacemos una comprobación de una de las variables necesarias, para saber que ya existen
+                if( !$('#contenedorInfotrenVista').hasClass('adif-infotren-vista') ){
+                document.body.innerHTML = '<div id="contenedorInfotrenVista" '+
+                        'id="'+vars["Monitor"]+'"'+
+                        'style="width: 100vw; height: 100vh"'+
+                        'class="adif-infotren-vista '+vars['interfaz']+'"'+
+                        'font-size="' + vars['font-size'] + '"' +
+                        'countdown="' + vars['countdown'] + '"' +
+                        'traffic-filter="' + vars['traffic'] + '"' +
+                        'show-access="' + vars['show-access'] + '"' +
+                        'idestacion="' + station + '"' +
+                        'rutarecursos="' + vars['rutaRecursos'] + '"' +
+
+                        setAttibutesString() +
+                    '></div>';
+                }
+                AdVista24_getMultimediaFolder('trains');
+
+            }else{
+                //Si no existen las vars se va a intentar en el siguiente frame de renderizado
+                requestAnimationFrame(generarCabecera);
+            }
+        }
+
+    </script>
+
+
+    <script src="assets/gravita/jquery/jquery-3.7.1.min.js"></script>
+    <script src="assets/gravita/dnv_grvta.js"></script>
+    <script src="assets/gravita/adif_frases.js"></script>
+    <script src="assets/gravita/adif_infotren_vista_interface.js"></script>
+    <script src="assets/gravita/adif_infotren_vista.js"></script>
+
+
+</body>
+</html>
+
